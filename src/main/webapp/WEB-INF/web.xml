@@ -41,6 +41,21 @@
     <location>/error-pages/500.html</location>
 </error-page>
 
+<web-app>
+    <!-- Altre configurazioni -->
+    
+    <!-- Definizione del filtro di sicurezza -->
+    <filter>
+        <filter-name>SecurityHeadersFilter</filter-name>
+        <filter-class>com.example.SecurityHeadersFilter</filter-class>
+    </filter>
+
+    <!-- Mappatura del filtro di sicurezza alle risorse -->
+    <filter-mapping>
+        <filter-name>SecurityHeadersFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+</web-app>
 
   
 </web-app>

@@ -41,6 +41,16 @@ public class Vendita extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
+    private String sanitizeInput(String input) {
+	    // Filtra i caratteri non consentiti
+	    input = input.replaceAll("<", "&lt;")
+	                 .replaceAll(">", "&gt;")
+	                 .replaceAll("\"", "&quot;")
+	                 .replaceAll("'", "&#39;")
+	                 .replaceAll("&", "&amp;");
+	    return input;
+	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductBean product = new ProductBean();
 		product.setEmail((String) request.getSession().getAttribute("email"));
@@ -60,22 +70,22 @@ public class Vendita extends HttpServlet {
 		                }
 		                else {
 		                	if (item.getFieldName().compareTo("nome") == 0) {
-		                		product.setNome(item.getString());
+		                		product.setNome(sanitizeInput(item.getString()));
 		                	}
 		                	else if (item.getFieldName().compareTo("prezzo") == 0) {
-		                		product.setPrezzo(Double.parseDouble(item.getString()));
+		                		product.setPrezzo(Double.parseDouble(sanitizeInput(item.getString())));
 		                	}
 		                	else if (item.getFieldName().compareTo("spedizione") == 0) {
-		                		product.setSpedizione(Double.parseDouble(item.getString()));
+		                		product.setSpedizione(Double.parseDouble(sanitizeInput((item.getString()))));
 		                	}
 		                	else if (item.getFieldName().compareTo("tipologia") == 0) {
-		                		product.setTipologia(item.getString());
+		                		product.setTipologia(sanitizeInput(item.getString()));
 		                	}
 							else if (item.getFieldName().compareTo("tag") == 0) {
-								product.setTag(item.getString());
+								product.setTag(sanitizeInput(item.getString()));
 							}
 							else if (item.getFieldName().compareTo("descrizione") == 0) {
-		                		product.setDescrizione(item.getString());
+		                		product.setDescrizione(sanitizeInput(item.getString()));
 		                	}
 		                }
 		            }
