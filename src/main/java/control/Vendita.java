@@ -41,6 +41,9 @@ public class Vendita extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+  
+    
+    /*questo è quello che ho aggiunto per la risoluzione dell'id 4*/ 
     
     private String sanitizeInput(String input) {
 	    // Filtra i caratteri non consentiti
@@ -51,6 +54,8 @@ public class Vendita extends HttpServlet {
 	                 .replaceAll("&", "&amp;");
 	    return input;
 	}
+    
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductBean product = new ProductBean();
 		product.setEmail((String) request.getSession().getAttribute("email"));
@@ -70,22 +75,22 @@ public class Vendita extends HttpServlet {
 		                }
 		                else {
 		                	if (item.getFieldName().compareTo("nome") == 0) {
-		                		product.setNome(sanitizeInput(item.getString()));
+		                		product.setNome(sanitizeInput(item.getString()));  /*questo è quello che ho aggiunto per la risoluzione dell'id 4*/ 
 		                	}
 		                	else if (item.getFieldName().compareTo("prezzo") == 0) {
-		                		product.setPrezzo(Double.parseDouble(sanitizeInput(item.getString())));
+		                		product.setPrezzo(Double.parseDouble((item.getString())));
 		                	}
 		                	else if (item.getFieldName().compareTo("spedizione") == 0) {
-		                		product.setSpedizione(Double.parseDouble(sanitizeInput((item.getString()))));
+		                		product.setSpedizione(Double.parseDouble(((item.getString()))));
 		                	}
 		                	else if (item.getFieldName().compareTo("tipologia") == 0) {
-		                		product.setTipologia(sanitizeInput(item.getString()));
+		                		product.setTipologia((item.getString()));
 		                	}
 							else if (item.getFieldName().compareTo("tag") == 0) {
-								product.setTag(sanitizeInput(item.getString()));
+								product.setTag((item.getString()));
 							}
 							else if (item.getFieldName().compareTo("descrizione") == 0) {
-		                		product.setDescrizione(sanitizeInput(item.getString()));
+		                		product.setDescrizione(sanitizeInput(item.getString()));  /*questo è quello che ho aggiunto per la risoluzione dell'id 4*/ 
 		                	}
 		                }
 		            }
